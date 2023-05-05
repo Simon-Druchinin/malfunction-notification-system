@@ -1,0 +1,109 @@
+@import '../bootstrap.scss'; // Bootstrap includes
+
+$auth-1-inner-max-width: 400px !default;
+
+body {
+  overflow-x: hidden; 
+}
+
+.gradient-text {
+  font-size: 18px;
+  font-weight: 800;
+  background: -webkit-linear-gradient(45deg, #09009f, #00ff95 80%);
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+}
+
+
+.auth-wrapper::before {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(-45deg, #60efff 0%, #00ff87 100% );
+  transform: translate3d(36px, 20px, 0) scale(0.95);
+  filter: blur(47px);
+  opacity: var(0.7);
+  transition: opacity 0.3s;
+  border-radius: inherit;
+}
+
+/* 
+* Prevents issues when the parent creates a 
+* stacking context. (For example, using the transform
+* property )
+*/
+.auth-wrapper::after {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: inherit;
+  border-radius: inherit;
+}
+      
+
+.auth-wrapper {
+  display: flex;
+  flex-basis: 100%;
+  min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
+  width: 100%;
+
+  .auth-inner {
+    width: 100%;
+    position: relative;
+  }
+
+  &.auth-v1 {
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; // For v1 scroll for long auth form
+  }
+
+  &.auth-v1 .auth-inner {
+    max-width: $auth-1-inner-max-width;
+  }
+
+  .brand-logo {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin: 1rem 0 2rem 0;
+    text-decoration: none;
+    img {
+      max-height: 65px;
+    }
+    .brand-container{
+      margin-left: 0.5rem;
+      .brand-text {
+        font-weight: 600;
+      }
+      .brand-subscription {
+        font-size: 15px;
+      }
+    }
+  }
+
+  .auth-footer-btn {
+    .btn {
+      padding: 0.6rem !important;
+      &:not(:last-child) {
+        margin-right: 1rem;
+      }
+    }
+  }
+}
+
+.auth-wrapper .auth-bg {
+  background-color: $white;
+  box-shadow: 2px 2px 3px 2px rgba(0, 0, 0, 0.2);
+}

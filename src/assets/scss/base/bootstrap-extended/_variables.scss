@@ -1,0 +1,30 @@
+$white: #fff;
+$gray-50: #f6f6f6;
+$gray-100: #babfc7; // $gray-lightest
+$gray-200: #ededed; // $gray-lighter
+$gray-300: #dae1e7; // $gray-light
+$gray-400: #636363;
+$gray-500: #adb5bd;
+$gray-600: #b8c2cc; // $gray
+$gray-700: #4e5154;
+$gray-800: #1e1e1e; // $gray-dark
+$gray-900: #2a2e30;
+$black: #22292f; // 231f48 22292f
+
+$purple: #7367f0; //$primary
+$green: #4bb543; //$success
+$blue: #00cfe8; //$info
+$orange: #ff9f43; //$warning
+$red: #ea5455; //$danger
+
+
+$theme-colors: (
+  'primary': $purple,
+  'secondary': #82868b,
+  'info': $blue,
+  'success': $green,
+  'warning': $orange,
+  'danger': $red,
+  'light': $gray-50,
+  'dark': hsl(0, 0%, 29%)
+);
