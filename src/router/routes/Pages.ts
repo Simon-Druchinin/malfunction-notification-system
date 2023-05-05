@@ -1,14 +1,24 @@
 import { lazy } from 'react'
+import { IRoute } from '../routes'
 
 
-const pagesRoutes = [
+const pagesRoutes: IRoute[] = [
     {
       path: '/home',
-      element: lazy(() => import('@/views/pages/home'))
+      element: lazy(() => import('@/views/pages/home')),
+      index: true,
+      meta: {
+        action: 'manage',
+        resource: 'default'
+      }
     },
     {
       path: '/faq',
-      element: lazy(() => import('@/views/pages/faq'))
+      element: lazy(() => import('@/views/pages/faq')),
+      meta: {
+        action: 'manage',
+        resource: 'default'
+      }
     }
 ]
 

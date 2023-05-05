@@ -10,6 +10,8 @@ import { store } from './redux/storeConfig/store'
 import ability from './configs/casl/ability'
 import { AbilityContext } from './utility/context/Can'
 
+import './index.scss'
+
 // ** Lazy load app
 const LazyApp = lazy(() => import('./App'))
 
