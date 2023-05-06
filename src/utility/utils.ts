@@ -1,7 +1,7 @@
 import useJwt from '@/auth/jwt/useJwt'
 import { useLocation } from 'react-router'
 
-const { getToken } = useJwt()
+const { jwtConfig, getToken } = useJwt()
 
 // ** Checks if an object is empty
 export const isObjEmpty = (obj: any): boolean => Object.keys(obj).length === 0
@@ -25,3 +25,5 @@ export const getErrorMessageText = (ruleName: string, ruleValue?: any): string =
 export const getHomeRouteForLoggedInUser = (userRole: string): string => {
   return '/home'
 }
+
+export const defaultAvatar = `${jwtConfig.baseURL}/media/default/_default_user_avatar.png`

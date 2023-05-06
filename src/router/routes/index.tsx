@@ -68,10 +68,10 @@ export interface IRoute {
   }
 
 const routes: RouteObject[] = createRoutesFromElements(
-  <Route>
+  <Route errorElement={<ErrorPage />}>
     <Route path='/' element={<Navigate to={isUserLoggedIn() ? defaultRoute : loginRoute} />} />
     <Route element={<ProtectedRoute meta={{authRoute: true}}><LoginPage /></ProtectedRoute>} path={'/login'} />
-    <Route element={<ProtectedLayout />} errorElement={<ErrorPage />}>
+    <Route element={<ProtectedLayout />}>
       {pagesRoutes.map((route: IRoute) => {
         return (
           <Route

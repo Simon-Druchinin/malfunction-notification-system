@@ -9,6 +9,7 @@ export type userData = {
   last_name: string;
   groups: {name: string}[];
   ability: {action: string, subject: string}[];
+  avatar?: string;
 }
 
 export type JwtToken = {
@@ -57,6 +58,19 @@ export default function useJwt() {
 
   const setRefreshToken = (value: string) => {
     localStorage.setItem(jwtConfig.storageRefreshTokenKeyName, value)
+  }
+
+  const removeToken = () => {
+    localStorage.removeItem(jwtConfig.storageTokenKeyName)
+  }
+
+  const removeRefreshToken = () => {
+    localStorage.removeItem(jwtConfig.storageRefreshTokenKeyName)
+  }
+
+  const handleLogout = () => {
+    removeToken()
+    removeRefreshToken()
   }
 
   const login = (...args: any[]) => {
@@ -130,6 +144,8 @@ export default function useJwt() {
     getToken,
     jwtConfig,
     setToken,
-    setRefreshToken
+    setRefreshToken,
+    handleLogout,
+    projectInstance
   }
 }

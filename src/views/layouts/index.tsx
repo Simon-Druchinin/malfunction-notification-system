@@ -1,17 +1,11 @@
 import { NavLink, Outlet } from 'react-router-dom'
+import VerticalLayout from './VerticalLayout'
 
 const Layout = (): JSX.Element => {
   return (
-    <>
-      <header>
-        <NavLink to="/home">Главная</NavLink>
-        <NavLink to="/faq">FAQ</NavLink>
-      </header>
-        <Outlet />
-      <footer>
-        COPYRIGHT © {new Date().getFullYear()}
-      </footer>
-    </>
+    <VerticalLayout>
+      <Outlet />
+    </VerticalLayout>
   )
 }
 

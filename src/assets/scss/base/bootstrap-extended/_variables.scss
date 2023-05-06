@@ -17,6 +17,14 @@ $blue: #00cfe8; //$info
 $orange: #ff9f43; //$warning
 $red: #ea5455; //$danger
 
+$primary: $purple;
+$secondary: #82868b;
+$info: $blue;
+$success: $green;
+$warning: $orange;
+$danger: $red;
+$light: $gray-50;
+$dark: hsl(0, 0%, 29%);
 
 $theme-colors: (
   'primary': $purple,
