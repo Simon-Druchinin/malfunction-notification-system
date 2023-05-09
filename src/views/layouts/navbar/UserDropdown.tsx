@@ -100,7 +100,7 @@ const UserDropdown = () => {
   } 
 
   return (
-    <UncontrolledDropdown tag='li' className='dropdown-user nav-item'>
+    <UncontrolledDropdown className='dropdown-user nav-item'>
       <DropdownToggle href='/' tag='a' className='nav-link dropdown-user-link' onClick={e => e.preventDefault()}>
         <div className='user-nav d-sm-flex d-none'>
           <span className='user-name font-weight-bold'>{ userData?.first_name }</span>

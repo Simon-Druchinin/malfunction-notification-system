@@ -1,6 +1,6 @@
 // ** React Imports
-import { lazy, useContext } from 'react'
-import { createRoutesFromElements, Navigate, Route, RouteObject, Routes } from 'react-router-dom'
+import { lazy, useContext, Suspense, useEffect } from 'react'
+import { createRoutesFromElements, Navigate, Route, RouteObject, Routes, useLocation, useNavigate } from 'react-router-dom'
 
 import { isUserLoggedIn } from '@/utility/utils'
 
@@ -9,6 +9,8 @@ import pagesRoutes from './Pages'
 // ** Page Layout
 import Layout from '@/views/layouts'
 import { AbilityContext } from '@/utility/context/Can'
+import useJwt from '@/auth/jwt/useJwt'
+import axios from 'axios'
 
 // ** Default Routes
 const defaultRoute: string = '/home'
@@ -39,6 +41,23 @@ export interface IRoute {
     const action = meta?.action
     const resource = meta?.resource
 
+    const { getRefreshToken, jwtConfig, handleLogout, projectInstance } = useJwt()
+    const navigate = useNavigate()
+    const location = useLocation()
+
+    useEffect(() => {
+      if (!isUserLoggedIn()) return
+
+      // ** If token wasn't verified or any errors occured - logout user
+      axios.post(`${jwtConfig.baseURL}/api/v1/token/verify/`, {
+        token: getRefreshToken()
+      }).then().catch(err => {
+        handleLogout()
+        navigate('/login')
+      })
+
+    }, [location])
+
     if (
       (!isLoggedIn && meta === undefined) ||
       (!isLoggedIn && meta && !meta.authRoute && !meta.publicRoute)
@@ -59,7 +78,7 @@ export interface IRoute {
       return <ErrorPage />
     } else {
       // ** If none of the above render component
-      return children
+      return <Suspense>{children}</Suspense>
     }
   }
 

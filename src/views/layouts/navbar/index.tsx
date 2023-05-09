@@ -1,14 +1,12 @@
 // ** Dropdowns Imports
 import UserDropdown from './UserDropdown'
 
-const Navbar = () => {
+const   Navbar = () => {
 
   return (
-    <>
-      <ul className='nav navbar-nav align-items-center ml-auto'>
-        <UserDropdown />
-      </ul>
-    </>
+    <ul className="nav navbar-nav align-items-center me-2">
+      <UserDropdown />
+    </ul>
   )
 }
 

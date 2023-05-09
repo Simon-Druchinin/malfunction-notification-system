@@ -19,7 +19,15 @@ const pagesRoutes: IRoute[] = [
         action: 'manage',
         resource: 'default'
       }
-    }
+    },
+    {
+      path: '/schema-editor',
+      element: lazy(() => import('@/views/pages/schema-editor')),
+      meta: {
+        action: 'manage',
+        resource: 'default'
+      }
+    },
 ]
 
 export default pagesRoutes

@@ -1,4 +1,4 @@
-@import '../bootstrap-extended/include'; // Bootstrap includes
+@import '../bootstrap-extended'; // Bootstrap includes
 
 $auth-1-inner-max-width: 400px !default;
 
@@ -95,7 +95,7 @@ body {
 
   .auth-footer-btn {
     .btn {
-      padding: 0.6rem !important;
+      padding: 0.6rem;
       &:not(:last-child) {
         margin-right: 1rem;
       }

@@ -142,6 +142,7 @@ export default function useJwt() {
   return {
     login,
     getToken,
+    getRefreshToken,
     jwtConfig,
     setToken,
     setRefreshToken,
