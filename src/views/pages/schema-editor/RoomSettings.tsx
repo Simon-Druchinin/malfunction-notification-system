@@ -13,7 +13,7 @@ import RoomItemsAccordion from './RoomItemsAccordion'
 
 const RoomSettings = (props: any): JSX.Element => {
   return (
-    <Row className='match-height'>
+    <Row>
       <Col md='4'>
         <Card className="shadow-lg p-3 mb-5 bg-body rounded">
           <CardHeader>

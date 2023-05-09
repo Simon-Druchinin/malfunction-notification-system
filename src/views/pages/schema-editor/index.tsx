@@ -30,7 +30,7 @@ const SchemaEditor = (): JSX.Element => {
         <Col>
           <Card>
               <CardHeader>
-                <Badge color='primary'>
+                <Badge className="fs-6 bg-gradient" color='primary'>
                   <Settings /> Настройки редактора
                 </Badge>
               </CardHeader>
