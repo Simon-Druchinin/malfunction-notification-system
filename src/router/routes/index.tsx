@@ -94,6 +94,7 @@ const routes: RouteObject[] = createRoutesFromElements(
       {pagesRoutes.map((route: IRoute) => {
         return (
           <Route
+            key={route.path}
             path={route.path}
             element={<ProtectedRoute meta={route.meta}><route.element /></ProtectedRoute>}
             index={route.index}

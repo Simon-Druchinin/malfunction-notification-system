@@ -12,6 +12,13 @@
     }
   }
 
+  // outline button on hover
+  &[class*='btn-outline-'] {
+    &:hover {
+      color: $white;
+    }
+  }
+
   // Icon button padding
   &.btn-icon {
     padding: 0.715rem 0.736rem;

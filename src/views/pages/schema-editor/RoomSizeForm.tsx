@@ -27,7 +27,7 @@ const RoomSizeForm = (props: any) => {
         </Label>
         <Input
           autoFocus
-          placeholder='Напр. 1800 см'
+          placeholder='Напр. 800 см'
           className={classnames('input-group-merge', { 'is-invalid': errors['roomLength'] })}
           value={roomSize.length}
           onChange={e => setRoomSize((prev: any) => {
@@ -42,7 +42,7 @@ const RoomSizeForm = (props: any) => {
         </Label>
         <Input
           autoFocus
-          placeholder='Напр. 800 см'
+          placeholder='Напр. 600 см'
           className={classnames('input-group-merge', { 'is-invalid': errors['roomWidth'] })}
           value={roomSize.width}
           onChange={e => setRoomSize((prev: any) => {

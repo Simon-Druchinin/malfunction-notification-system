@@ -1,27 +1,44 @@
 import { useState, useRef } from "react"
-import { Stage, Layer, Rect, Circle, Group, Shape } from "react-konva"
+import { Stage, Layer, Rect, Group, Shape } from "react-konva"
+import { Html } from 'react-konva-utils'
+import * as Elements from './elements'
+import { Card, CardHeader, CardBody } from "reactstrap"
 
 const CELL_WIDTH = 50
 const CELL_HEIGHT = 50
 
 
 const Canvas = (props: any) => {
-  const { width, height, mode, roomSize } = props
+  const { 
+    width, 
+    height, 
+    mode, 
+    roomSize, 
+    canvasItems, 
+    setCanvasItems, 
+    itemCategories,
+    invisibleCategories,
+    activeElement,
+    setActiveElement
+  } = props
+
   const stageRef = useRef(null)
 
   const [stagePos, setStagePos] = useState({ x: 0, y: 0 })
   const [stageScale, setStageScale] = useState({ x: 0.9, y: 0.9 })
   const [stageScalePosition, setStageScalePosition] = useState({ x: 0, y: 0 })
 
-  const startX = -stagePos.x - window.screen.width
-  const endX = -stagePos.x + window.screen.width * 2
+  const startX = -stagePos.x - width
+  const endX = -stagePos.x + width * 2
 
-  const startY = -stagePos.y - window.screen.height
-  const endY = -stagePos.y + window.screen.height * 2
+  const startY = -stagePos.y - height
+  const endY = -stagePos.y + height * 2
 
   const gridComponents = []
 
   const scaleBy = 1.2
+
+  const draggable: boolean = mode === 'edit' ? true : false
 
   const handleScale = (e: any) => {
     e.evt.preventDefault()
@@ -42,7 +59,7 @@ const Canvas = (props: any) => {
     }
 
     let newScale = direction > 0 ? oldScale * scaleBy : oldScale / scaleBy
-    newScale = newScale > 1.5 ? Math.min(newScale, 1.5) : Math.max(newScale, 0.3)
+    newScale = newScale > 1.5 ? Math.min(newScale, 1.5) : Math.max(newScale, 0.5)
 
     const newPos = {
       x: pointer.x - mousePointTo.x * newScale,
@@ -70,6 +87,39 @@ const Canvas = (props: any) => {
     }
   }
 
+  const handleElementClick = (e: any, item: any) => {
+    setActiveElement(item)
+  }
+
+  const handleDragEnd = (e: any, key: number) => {
+    const result = canvasItems.map((item: any) => item.key === key ? {...item, x: e.target.position().x, y: e.target.position().y} : {...item})   
+    setCanvasItems(result)
+  }
+
+  const renderElements = (itemCategory: string): JSX.Element => {
+    
+    return canvasItems.filter((item: any) => item.category.name === itemCategory).map((item: any, index: number) => {
+      const Element = Elements[item.type as keyof typeof Elements]
+
+      return (
+        <Group
+          key={`${item.key}-${index}`}
+          x={item.x}
+          y={item.y}
+          onClick={(e) => handleElementClick(e, item)}
+          draggable={draggable}
+          onDragMove={(e) => handleDragEnd(e, item.key)}
+          onDragEnd={(e) => handleDragEnd(e, item.key)}
+        >
+          <Element
+            stroke={activeElement?.key === item.key ? 'red' : 'gray'}
+            strokeWidth={activeElement?.key === item.key ? 3 : 2}
+          />
+        </Group >
+      )
+    })
+  }
+
   return (
     <Stage
       ref={stageRef}
@@ -86,7 +136,7 @@ const Canvas = (props: any) => {
       }}
     >
       <Layer name="backgroundLayer">{gridComponents}</Layer>
-      <Layer name="RoomCascadeLayer">
+      <Layer name="roomCascadeLayer">
         <Group>
           <Shape
               sceneFunc={(context, shape) => {
@@ -108,7 +158,25 @@ const Canvas = (props: any) => {
           />
         </Group>
       </Layer>
-      <Layer name="RoomElementsLayer">
+      <Layer name={'itemsLayer'} key={'itemsLayer'}>
+      {itemCategories.map((itemCategory: any, index: number) => {
+        if (invisibleCategories.includes(itemCategory.name)) return
+
+        return (
+          <Group
+            key={itemCategory.name}            
+          >
+            {renderElements(itemCategory.name)}
+          </Group>
+        )
+      })}
+      </Layer>
+      <Layer name="infoLayer">
+        <Group
+          x={width}
+          y={10}
+        >
+        </Group>
       </Layer>
     </Stage>
   )

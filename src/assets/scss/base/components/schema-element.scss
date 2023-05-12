@@ -1,0 +1,38 @@
+.element-name {
+  cursor: pointer;
+  transition: background-color 150ms ease-in;
+  
+  &:hover{
+    background-color: $primary !important;
+  }
+}
+
+.settings-card {
+  max-height: 300px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+
+.elements-card {
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.elements-card::-webkit-scrollbar {
+  width: 8px;
+}
+
+.elements-card::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background-color: #cfcaca;
+}
+
+.element-info__card {
+  position: absolute;
+  z-index: 1;
+  top: 100px;
+  right: 50px;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+
