@@ -1,17 +1,18 @@
 import { useState, useEffect, useRef } from "react"
 import { Row , Col, Card, CardBody, CardHeader, Badge } from "reactstrap"
 
-import { Settings, Edit } from 'react-feather'
+import { Edit, Eye } from 'react-feather'
 
-import Canvas from './Canvas'
-import SaveForm from './SaveForm'
-import SchemaSelect, { defaultSelectOption, selectRoomValue } from './SchemaSelect'
-import RoomSettings from './RoomSettings'
-import ElementEditCard from "./ElementEditCard"
+import Canvas from '../schema-editor/Canvas'
+import SaveApplicationForm from './SaveApplicationForm'
+import SchemaSelect, { selectRoomValue } from '../schema-editor/SchemaSelect'
+import ApplicationSettings from './ApplicationSettings'
+import ElementApplicationCard from "./ElementApplicationCard"
+import useJwt from "@/auth/jwt/useJwt"
 
 
-const SchemaEditor = (): JSX.Element => {
-  const mode = 'edit'
+const ApplicationEditor = (): JSX.Element => {
+  const mode = 'view'
 
   const [canvasWidth, setCanvasWidth] = useState<number>(0)
   const [canvasItems, setCanvasItems] = useState([])
@@ -20,9 +21,11 @@ const SchemaEditor = (): JSX.Element => {
   const [invisibleCategories, setInvisibleCategories] = useState([])
   const [roomSize, setRoomSize] = useState<{width: number | string, length: number | string}>({width: '', length: ''})
 
-  const [selectedRoom, setSelectedRoom] = useState<selectRoomValue>(defaultSelectOption)
+  const [selectedRoom, setSelectedRoom] = useState<selectRoomValue>()
 
   const cardBodyRef: any = useRef(null)
+
+  const { projectInstance } = useJwt()
 
   useEffect(() => {
     if (!cardBodyRef?.current) return
@@ -32,26 +35,31 @@ const SchemaEditor = (): JSX.Element => {
 
     return () => window.removeEventListener('resize', () => setCanvasWidth(cardBodyRef.current.offsetWidth))
   }, [])
+
+  useEffect(() => {
+    projectInstance.get('/api/v1/schemas/item-categories/')
+      .then((response: any) => {
+        setItemCategories(response.data)
+      })
+  }, [])
   
   return (
-    <div id='schema-editor'>
+    <div id='application-editor'>
       <Row className='match-height'>
         <Col>
           <Card>
               <CardHeader>
                 <Badge className="fs-6 bg-gradient" color='primary'>
-                  <Settings /> Настройки редактора
+                  <Edit /> Параметры заявки
                 </Badge>
               </CardHeader>
               <CardBody>
-                <RoomSettings
-                  roomSize={roomSize}
-                  setRoomSize={setRoomSize}
-                  setCanvasItems={setCanvasItems}
+                <ApplicationSettings
+                  canvasItems={canvasItems}
                   itemCategories={itemCategories}
-                  setItemCategories={setItemCategories}
                   invisibleCategories={invisibleCategories}
                   setInvisibleCategories={setInvisibleCategories}
+                  setActiveElement={setActiveElement}
                 />
               </CardBody>
           </Card>
@@ -62,26 +70,24 @@ const SchemaEditor = (): JSX.Element => {
           <Card>
             <CardHeader>
               <Badge className="fs-6 bg-gradient mb-2 mb-md-0" color="primary">
-                <Edit /> Редактор комнат
+                <Eye /> Просмотр комнат
               </Badge>
               <SchemaSelect 
                 className={'mb-2 mb-md-0'}
-                mode={mode}
                 setCanvasItems={setCanvasItems}
                 setRoomSize={setRoomSize}
                 selectedRoom={selectedRoom}
                 setSelectedRoom={setSelectedRoom}
                 setActiveElement={setActiveElement}
               />
-              <SaveForm
+              <SaveApplicationForm
                 canvasItems={canvasItems}
-                roomSize={roomSize}
                 selectedRoom={selectedRoom}
               />
-              <ElementEditCard
+              <ElementApplicationCard
                 activeElement={activeElement}
+                canvasItems={canvasItems}
                 setCanvasItems={setCanvasItems}
-                setActiveElement={setActiveElement}
               />
             </CardHeader>
             <CardBody className="overflow-hidden" innerRef={cardBodyRef}>
@@ -105,4 +111,4 @@ const SchemaEditor = (): JSX.Element => {
   )
 }
 
-export default SchemaEditor
+export default ApplicationEditor

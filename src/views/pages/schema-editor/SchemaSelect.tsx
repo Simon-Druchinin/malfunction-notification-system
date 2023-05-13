@@ -10,7 +10,7 @@ export type selectRoomValue = {
 export const defaultSelectOption = { value: 'newSchema', label: 'Новая Схема' }
 
 const SchemaSelect = (props: any) => {
-  const { className, setCanvasItems, setRoomSize, defaultSelectOption, selectedRoom, setSelectedRoom } = props
+  const { className, setCanvasItems, setRoomSize, selectedRoom, setSelectedRoom, mode, setActiveElement } = props
   
   const [roomSchemaOptions, setRoomSchemaOptions] = useState<selectRoomValue[]>([defaultSelectOption])
 
@@ -22,12 +22,17 @@ const SchemaSelect = (props: any) => {
         const roomSchemaFetchedOptions = response.data.map((roomSchema: any) => {
           return { label: roomSchema.name, value: roomSchema.id }
         })
-
-        setRoomSchemaOptions([{ value: 'newSchema', label: 'Новая Схема' }, ...roomSchemaFetchedOptions])
+        if (mode === 'edit') {
+          setRoomSchemaOptions([defaultSelectOption, ...roomSchemaFetchedOptions])
+        } else {
+          setRoomSchemaOptions([...roomSchemaFetchedOptions])
+        } 
+        
       })
   }, [])
 
   useEffect(() => {
+    setActiveElement(null)
     if (!selectedRoom) return
 
     if (selectedRoom.value === 'newSchema') {
@@ -54,7 +59,7 @@ const SchemaSelect = (props: any) => {
       classNamePrefix='select'
       value={selectedRoom}
       onChange={(e: any) => setSelectedRoom(e)}
-      defaultValue={defaultSelectOption}
+      defaultValue={mode === 'edit' ? defaultSelectOption : ''}
       options={roomSchemaOptions}
       placeholder={'Кабинет №...'}
       noOptionsMessage={() => 'Пусто'}

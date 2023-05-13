@@ -116,7 +116,7 @@ const SaveForm = (props: any) => {
               </Button>
               {selectedRoom.value !== 'newSchema' ?
                 <Button className='mt-3' color='danger' block outline onClick={deleteSchema}>
-                  <Trash className="me-1"/> Удалить
+                  <Trash size={16} className="me-1"/> Удалить
                 </Button>
               : null}
           </Form>

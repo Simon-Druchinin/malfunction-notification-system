@@ -13,20 +13,20 @@ const pagesRoutes: IRoute[] = [
       }
     },
     {
-      path: '/faq',
-      element: lazy(() => import('@/views/pages/faq')),
+      path: '/schema-editor',
+      element: lazy(() => import('@/views/pages/schema-editor')),
+    },
+    {
+      path: '/applications/create',
+      element: lazy(() => import('@/views/pages/applications')),
       meta: {
         action: 'manage',
         resource: 'default'
       }
     },
     {
-      path: '/schema-editor',
-      element: lazy(() => import('@/views/pages/schema-editor')),
-      meta: {
-        action: 'manage',
-        resource: 'default'
-      }
+      path: '/users/create',
+      element: lazy(() => import('@/views/pages/users/create')),
     },
 ]
 

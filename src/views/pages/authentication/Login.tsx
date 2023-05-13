@@ -52,7 +52,7 @@ const Login = (): JSX.Element => {
         navigate(getHomeRouteForLoggedInUser(''))
       })
       .catch((error: any) => setError(true))
-  };
+  }
 
   const setEmailAndPassword = (email: string, password: string) => {
     setValue('email', email)
@@ -74,8 +74,9 @@ const Login = (): JSX.Element => {
             <Alert id='dev-login-only' color='danger'>
               <div className='alert-body' style={{fontSize: '15px'}}>
                 <small className='me-50'>
-                  <div style={{cursor: 'pointer'}} onClick={() => setEmailAndPassword('prepod@mail.ru', '1234')}>Преподаватель: prepod@mail.ru | 1234</div>
-                  <div style={{cursor: 'pointer'}} onClick={() => setEmailAndPassword('admin@mail.ru', '1234')}>Главный админ: admin@mail.ru | 1234</div>
+                  <div style={{cursor: 'pointer'}} onClick={() => setEmailAndPassword('prepod@mail.ru', '1234')}>Преподаватель: prepod@mail.ru | 1234</div>                  
+                  <div style={{cursor: 'pointer'}} onClick={() => setEmailAndPassword('admin@mail.ru', '1234')}>Администратор: admin@mail.ru | 1234</div>
+                  <div style={{cursor: 'pointer'}} onClick={() => setEmailAndPassword('zavhoz@mail.ru', '1234')}>Завхоз: zavhoz@mail.ru | 1234</div>
                 </small>
               </div>
               <Tooltip

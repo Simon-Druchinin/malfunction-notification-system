@@ -1,7 +1,7 @@
 import { Card, CardHeader, CardBody, Badge, Button } from "reactstrap"
 import { Trash2 } from "react-feather"
 
-const ElementInfoCard = (props: any): JSX.Element => {
+const ElementEditCard = (props: any): JSX.Element => {
   const { activeElement, setCanvasItems, setActiveElement } = props
 
   const handleDelete = () => {
@@ -27,4 +27,4 @@ const ElementInfoCard = (props: any): JSX.Element => {
   )
 }
 
-export default ElementInfoCard
+export default ElementEditCard
