@@ -102,20 +102,22 @@ const Canvas = (props: any) => {
       const Element = Elements[item.type as keyof typeof Elements]
 
       return (
-        <Group
-          key={`${item.key}-${index}`}
-          x={item.x}
-          y={item.y}
-          onClick={(e) => handleElementClick(e, item)}
-          draggable={draggable}
-          onDragMove={(e) => handleDragEnd(e, item.key)}
-          onDragEnd={(e) => handleDragEnd(e, item.key)}
-        >
-          <Element
-            stroke={activeElement?.key === item.key ? 'red' : 'gray'}
-            strokeWidth={activeElement?.key === item.key ? 3 : 2}
-          />
-        </Group >
+        <>
+          <Group
+            key={`${item.key}-${index}`}
+            x={item.x}
+            y={item.y}
+            onClick={(e) => handleElementClick(e, item)}
+            draggable={draggable}
+            onDragMove={(e) => handleDragEnd(e, item.key)}
+            onDragEnd={(e) => handleDragEnd(e, item.key)}
+          >
+            <Element
+              stroke={activeElement?.key === item.key ? 'red' : 'gray'}
+              strokeWidth={activeElement?.key === item.key ? 3 : 2}
+            />
+          </Group >
+        </>
       )
     })
   }
@@ -164,7 +166,7 @@ const Canvas = (props: any) => {
 
         return (
           <Group
-            key={itemCategory.name}            
+            key={itemCategory.name}        
           >
             {renderElements(itemCategory.name)}
           </Group>
