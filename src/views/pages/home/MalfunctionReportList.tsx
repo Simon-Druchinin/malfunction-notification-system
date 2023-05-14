@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 
 import useJwt from "@/auth/jwt/useJwt"
-import { Col, Badge, Card, CardBody, CardHeader, Button } from "reactstrap"
+import { Row, Col, Badge, Card, CardBody, CardHeader, Button } from "reactstrap"
 import * as Icon from "react-feather"
 import { Link } from "react-router-dom"
 
@@ -31,7 +31,7 @@ const MalfunctionReportList = (props: any): JSX.Element => {
           {malfunctionReports.map((report: any, index: number) => {
             const date_created = new Date(report.date_created)
             return (
-              <Col key={report.id} className='mt-1 d-flex justify-content-between align-items-center'>
+              <div key={report.id} className='report-info-card'>
                 <div>
                   <Link to={`/applications/view/${report.id}`}>  
                     <Badge className='mx-2' color='success'>
@@ -49,7 +49,7 @@ const MalfunctionReportList = (props: any): JSX.Element => {
                   </Badge>
                   {date_created.toLocaleDateString("ru-RU")}
                 </div>
-              </Col>
+              </div>
             )
           })}
           {malfunctionReports.length === 0 ? <Badge>Пусто</Badge> : null}

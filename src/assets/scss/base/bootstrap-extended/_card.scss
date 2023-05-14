@@ -9,6 +9,17 @@
   }
 }
 
+.report-info-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.25rem;
+  
+  @include media-breakpoint-down(md) {
+    margin-top: 1rem;
+  }
+}
+
 .card {
   border: none;
   margin-bottom: $content-padding;

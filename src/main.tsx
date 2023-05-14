@@ -10,6 +10,8 @@ import { store } from './redux/storeConfig/store'
 import ability from './configs/casl/ability'
 import { AbilityContext } from './utility/context/Can'
 
+import Spinner from './views/components/spinner'
+
 import './index.scss'
 
 // ** Lazy load app
@@ -18,8 +20,8 @@ const LazyApp = lazy(() => import('./App'))
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
-      <Suspense fallback> {/* FIXME - Add Fallback */}
-        <AbilityContext.Provider value={ability}> {/* FIXME - Add CASL ability */}
+      <Suspense fallback={<Spinner />}>
+        <AbilityContext.Provider value={ability}>
           <LazyApp />
         </AbilityContext.Provider>
       </Suspense>

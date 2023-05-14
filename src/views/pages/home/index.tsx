@@ -14,14 +14,14 @@ const Home = (): JSX.Element => {
 
   return (
     <Row className="match-height">
-      <Col sm='6'>
+      <Col md='6'>
         <MalfunctionReportList
           title={'Все Заявки'}
           icon={'Compass'}
           requestUrl={'/api/v1/schemas/malfunction-reports/'}
         />
       </Col>
-      <Col sm='6'>
+      <Col md='6'>
         <MalfunctionReportList
           title={'Мои (Созданные) Заявки'}
           icon={'Edit'}
@@ -29,7 +29,7 @@ const Home = (): JSX.Element => {
         />
       </Col>
       <Can I='take' a='malfunctionreport'>
-        <Col sm='6'>
+        <Col md='6'>
           <MalfunctionReportList
             title={'Мои (Рабочие) Заявки'}
             icon={'Activity'}

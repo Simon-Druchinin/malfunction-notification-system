@@ -12,6 +12,8 @@ import { AbilityContext } from '@/utility/context/Can'
 import useJwt from '@/auth/jwt/useJwt'
 import axios from 'axios'
 
+import Spinner from '@/views/components/spinner'
+
 // ** Default Routes
 const defaultRoute: string = '/home'
 const loginRoute: string = '/login'
@@ -78,7 +80,7 @@ export interface IRoute {
       return <ErrorPage />
     } else {
       // ** If none of the above render component
-      return <Suspense>{children}</Suspense>
+      return <Suspense fallback={<Spinner />}>{children}</Suspense>
     }
   }
 
