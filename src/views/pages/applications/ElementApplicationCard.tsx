@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { Card, CardHeader, CardBody, Badge, Input, Label, Form } from "reactstrap"
 
 const ElementApplicationCard = (props: any): JSX.Element => {
-  const { activeElement, canvasItems, setCanvasItems } = props
+  const { activeElement, canvasItems, setCanvasItems, mode } = props
   const [problem_text, setProblemText] = useState<string>('')
 
   const handleElementProblemText = (e: any) => {
@@ -29,6 +29,7 @@ const ElementApplicationCard = (props: any): JSX.Element => {
         <Label for={'element-problem-text-area'}>Описание проблемы:</Label>
         <Input
           value={problem_text}
+          readOnly={mode === 'applicationView'}
           onChange={handleElementProblemText}
           id={'element-problem-text-area'}
           name={'element-problem-text-area'}

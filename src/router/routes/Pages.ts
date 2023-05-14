@@ -25,6 +25,14 @@ const pagesRoutes: IRoute[] = [
       }
     },
     {
+      path: '/applications/view/:reportId',
+      element: lazy(() => import('@/views/pages/applications/view')),
+      meta: {
+        action: 'manage',
+        resource: 'default'
+      }
+    },
+    {
       path: '/users/create',
       element: lazy(() => import('@/views/pages/users/create')),
     },

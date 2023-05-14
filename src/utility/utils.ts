@@ -27,3 +27,7 @@ export const getHomeRouteForLoggedInUser = (userRole: string): string => {
 }
 
 export const defaultAvatar = `${jwtConfig.baseURL}/media/default/_default_user_avatar.png`
+
+export const handleReload = () => {
+  window.location.reload()
+}

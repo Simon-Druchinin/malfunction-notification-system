@@ -10,6 +10,7 @@ import {
 
 import RoomItemsVisibilityForm from '@/views/pages/schema-editor/RoomItemsVisibilityForm'
 import ProblemElementsList from "./ProblemElementsList"
+import ApplicationData from './ApplicationData'
 
 
 const ApplicationSettings = (props: any): JSX.Element => {
@@ -43,6 +44,21 @@ const ApplicationSettings = (props: any): JSX.Element => {
           </CardBody>
         </Card>
       </Col>
+      {props.mode === 'applicationView' ?
+        <Col md='4'>
+          <Card className='settings-card elements-card'>
+            <CardHeader>
+              <Badge color='success'>Данные о заявке</Badge>
+            </CardHeader>
+            <CardBody>
+              <ApplicationData
+                canvasItems={props.canvasItems}
+                malfunctionData={props.malfunctionData}
+              />
+            </CardBody>
+          </Card>
+        </Col>
+      : null}
     </Row>
   )
 }

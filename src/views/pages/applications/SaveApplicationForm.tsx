@@ -10,7 +10,7 @@ import useJwt from "@/auth/jwt/useJwt"
 import { Trash } from "react-feather"
 
 const SaveApplicationForm = (props: any) => {
-  const { canvasItems, roomSize, selectedRoom } = props
+  const { canvasItems, roomSize, selectedRoom, mode, malfunctionData } = props
 
   const [modal, setModal] = useState(false)
 
@@ -29,12 +29,6 @@ const SaveApplicationForm = (props: any) => {
 
   const handleReload = () => {
     window.location.reload()
-  }
-
-  const deleteApplication = async () => {
-    // FIXME
-    // const deleteResponse = await projectInstance.delete(`/api/v1/schemas/room-schemas/${selectedRoom.value}/`)
-    handleReload()
   }
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
@@ -67,10 +61,12 @@ const SaveApplicationForm = (props: any) => {
   return (
     <>
     <Button className='text-white px-4 py-2' color='primary' onClick={handleModal}>
-      Создать заявку
+      {mode === 'applicationView' ? 'Просмотр заявки' : 'Создать заявку'}
     </Button>
     <Modal isOpen={modal} toggle={handleModal}>
-        <ModalHeader>Создать заявку</ModalHeader>
+        <ModalHeader>
+         {mode === 'applicationView' ? 'Просмотр заявки' : 'Создать заявку'}
+        </ModalHeader>
         <ModalBody>
           <Form onSubmit={handleSubmit(onSubmit)}>
             <FormGroup>
@@ -82,12 +78,13 @@ const SaveApplicationForm = (props: any) => {
                   ({ field }) =>
                   <Input
                     autoFocus
+                    readOnly={mode === 'applicationView'}
                     placeholder="Неисправности..."
                     className={classnames('input-group-merge', { 'is-invalid': errors['name'] })}
                     {...field}
                   />
-                }          
-                defaultValue={''} 
+                }
+                defaultValue={mode === 'applicationView' ? malfunctionData?.name : ''}
                 control={control}
                 name='name'
                 rules={{ required: {value: true, message: getErrorMessageText('required')} }}
@@ -103,21 +100,24 @@ const SaveApplicationForm = (props: any) => {
                   ({ field }) =>
                   <Input
                     type="textarea"
+                    readOnly={mode === 'applicationView'}
                     placeholder="В кабинете не работает..."
                     className={classnames('input-group-merge', { 'is-invalid': errors['problem_text'] })}
                     {...field}
                   />
                 }          
-                defaultValue={''} 
+                defaultValue={mode === 'applicationView' ? malfunctionData?.problem_text : ''} 
                 control={control}
                 name='problem_text'
                 rules={{ required: {value: true, message: getErrorMessageText('required')} }}
               />
               {errors?.problem_text && <FormFeedback>{errors.problem_text.message}</FormFeedback>}
             </FormGroup>
+            {mode !== 'applicationView' ? 
             <Button className='text-white' type='submit' color='primary' block>
               Сохранить
             </Button>
+            : null}
           </Form>
         </ModalBody>
       </Modal>
