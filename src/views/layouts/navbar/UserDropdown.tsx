@@ -1,7 +1,7 @@
 // ** React Imports
 import { useEffect, useState } from 'react'
 
-import useJwt, { userData as userDataType } from '@/auth/jwt/useJwt'
+import useJwt, { JwtToken, userData as userDataType } from '@/auth/jwt/useJwt'
 
 // ** Router
 import { Link } from 'react-router-dom'
@@ -18,6 +18,8 @@ import { UncontrolledDropdown, DropdownMenu, DropdownToggle, DropdownItem } from
 // ** Icons
 import * as Icon from 'react-feather'
 
+import jwt_decode from "jwt-decode"
+
 
 export type dropDownMenuType = {
   id: number;
@@ -29,37 +31,12 @@ export type dropDownMenuType = {
 
 const UserDropdown = () => {
   // ** State
-  const [userData, setUserData] = useState<userDataType>()
-  const [data, setData] = useState<dropDownMenuType[] | []>([
-    {
-        "id": 1,
-        "title": "Профиль",
-        "type": null,
-        "icon": "User",
-        "navLink": "/profile"
-    },
-    {
-        "id": 2,
-        "title": "Настройки",
-        "type": null,
-        "icon": "Settings",
-        "navLink": "/settings"
-    },
-    {
-        "id": 3,
-        "title": null,
-        "type": "divider",
-        "icon": null,
-        "navLink": null
-    },
-    {
-        "id": 4,
-        "title": "Выйти",
-        "type": "logout",
-        "icon": "Logout",
-        "navLink": "/login"
-    }
-])
+  const [data, setData] = useState<dropDownMenuType[] | []>([])
+
+  const { getToken } = useJwt()
+
+  const decoded_token: JwtToken = jwt_decode(getToken() as string)
+  const userData: userDataType = decoded_token.user_data
 
   const { handleLogout, projectInstance } = useJwt()
 
@@ -103,8 +80,8 @@ const UserDropdown = () => {
     <UncontrolledDropdown className='dropdown-user nav-item'>
       <DropdownToggle href='/' tag='a' className='nav-link dropdown-user-link' onClick={e => e.preventDefault()}>
         <div className='user-nav d-sm-flex d-none'>
-          <span className='user-name font-weight-bold'>{ userData?.first_name }</span>
-          <span className='user-status'>{ userData?.groups[0].name }</span>
+          <span className='user-name font-weight-bold text-black'>{ userData?.last_name } { userData?.first_name }</span>
+          <span className='user-status text-black'>{ userData?.groups[0].name }</span>
         </div>
         <Avatar img={userAvatar} imgHeight='40' imgWidth='40' status='online' />
       </DropdownToggle>
