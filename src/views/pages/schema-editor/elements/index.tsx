@@ -1,7 +1,11 @@
 import { Circle, Rect, Group, Line, RegularPolygon, Arrow } from "react-konva"
 
+type ElementProps = {
+  stroke: string | CanvasGradient,
+  strokeWidth: number
+}
 
-export const Lamp = (props: any): JSX.Element => {
+export const Lamp = (props: ElementProps): JSX.Element => {
   const {
     stroke,
     strokeWidth
@@ -17,7 +21,7 @@ export const Lamp = (props: any): JSX.Element => {
   )
 }
 
-export const Table = (props: any): JSX.Element => {
+export const Table = (props: ElementProps): JSX.Element => {
   const {
     stroke,
     strokeWidth
@@ -34,7 +38,7 @@ export const Table = (props: any): JSX.Element => {
   )
 }
 
-export const Conditioner = (props: any): JSX.Element => {
+export const Conditioner = (props: ElementProps): JSX.Element => {
   const {
     stroke,
     strokeWidth
@@ -64,7 +68,7 @@ export const Conditioner = (props: any): JSX.Element => {
   )
 }
 
-export const Socket = (props: any): JSX.Element => {
+export const Socket = (props: ElementProps): JSX.Element => {
   const {
     stroke,
     strokeWidth
@@ -82,7 +86,7 @@ export const Socket = (props: any): JSX.Element => {
   )
 }
 
-export const Chair = (props: any): JSX.Element => {
+export const Chair = (props: ElementProps): JSX.Element => {
   const {
     stroke,
     strokeWidth
@@ -107,7 +111,7 @@ export const Chair = (props: any): JSX.Element => {
   )
 }
 
-export const Monitor = (props: any): JSX.Element => {
+export const Monitor = (props: ElementProps): JSX.Element => {
   const {
     stroke,
     strokeWidth
@@ -133,7 +137,7 @@ export const Monitor = (props: any): JSX.Element => {
   )
 }
 
-export const SystemUnit = (props: any): JSX.Element => {
+export const SystemUnit = (props: ElementProps): JSX.Element => {
   const {
     stroke,
     strokeWidth
@@ -158,7 +162,7 @@ export const SystemUnit = (props: any): JSX.Element => {
   )
 }
 
-export const SwitchBox = (props: any): JSX.Element => {
+export const SwitchBox = (props: ElementProps): JSX.Element => {
   const {
     stroke,
     strokeWidth
